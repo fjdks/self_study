@@ -1,0 +1,79 @@
+package BOJ;
+
+import java.io.*;
+import java.util.*;
+
+public class BOJ_9019 {
+	
+	static int A, B;
+	static StringBuilder sb = null;
+	
+	static int D(int n) {
+		return (2 * n) % 10000;
+	}
+	
+	static int S(int n) {
+		return n - 1 == 0? 9999 : n - 1;
+	}
+	
+	static int L(int n) {
+		return (n % 1000) * 10 + n / 1000;
+	}
+	
+	static int R(int n) {
+		return (n % 10) * 1000 + n / 10;
+	}
+	
+	static void BFS(int n) {
+		ArrayDeque<Integer> q = new ArrayDeque<>();
+		boolean[] v = new boolean[10000];
+		String[] command = new String[10000];
+		
+		q.add(n);
+		v[n] = true;
+		while(!q.isEmpty()) {
+			if(v[B]) break;
+			int cur = q.poll();
+			
+			int D = D(cur);
+			int S = S(cur);
+			int L = L(cur);
+			int R = R(cur);
+			
+			if(!v[D]) {
+				q.add(D);
+				v[D] = true;
+				command[D] = command[cur] + D;
+			} else if(!v[S]) {
+				q.add(S);
+				v[S] = true;
+				command[S] = command[cur] + S;
+			} else if(!v[L]) {
+				q.add(L);
+				v[L] = true;
+				command[L] = command[cur] + L;
+			} else if(!v[R]) {
+				q.add(R);
+				v[R] = true;
+				command[R] = command[cur] + R;
+			}
+		}
+		System.out.println(B);
+	}
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = null;
+		
+		int T = Integer.parseInt(br.readLine());
+		for (int tc = 1; tc < T; tc++) {
+			st = new StringTokenizer(br.readLine());
+			A = Integer.parseInt(st.nextToken());
+			B = Integer.parseInt(st.nextToken());
+			
+			BFS(A);
+		}
+		
+		br.close();
+	}
+}
