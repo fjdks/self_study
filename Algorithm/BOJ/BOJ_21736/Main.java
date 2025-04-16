@@ -1,8 +1,7 @@
 package BOJ_21736;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 
@@ -22,6 +21,28 @@ public class Main {
 			if(0 <= ni && ni < N && 0 <= nj && nj < M && campus[ni][nj] != 'X' && !v[ni][nj]) {
 				v[ni][nj] = true;
 				dfs(ni, nj);
+			}
+		}
+	}
+	
+	static void bfs(int cur_i, int cur_j) {
+		Queue<int[]> q = new LinkedList<int[]>();
+		q.add(new int[] {cur_i, cur_j});
+		v[cur_i][cur_j] = true;
+		
+		while(!q.isEmpty()) {
+			int[] cur = q.poll();
+			int i = cur[0];
+			int j = cur[1];
+			if(campus[i][j] == 'P') cnt++;
+			
+			for (int d = 0; d < 4; d++) {
+				int ni = i + di[d];
+				int nj = j + dj[d];
+				if(0 <= ni && ni < N && 0 <= nj && nj < M && campus[ni][nj] != 'X' && !v[ni][nj]) {
+					q.add(new int[] {ni, nj});
+					v[ni][nj] = true;
+				}
 			}
 		}
 	}
@@ -48,7 +69,8 @@ public class Main {
 		}
 		
 		cnt = 0;
-		dfs(I_pos[0], I_pos[1]);
+//		dfs(I_pos[0], I_pos[1]);
+		bfs(I_pos[0], I_pos[1]);
 		System.out.println(cnt == 0 ? "TT" : cnt);
 		
 	}
