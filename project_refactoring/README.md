@@ -18,3 +18,5 @@
    - powershell 실행
    - flutter doctor 입력
    - 발생한 각 에러 해결
+
+## Developing
