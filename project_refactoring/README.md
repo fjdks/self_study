@@ -34,7 +34,7 @@
           - flutterfire configure
             - 이전에 생성한 firebase 프로젝트 선택
             - main.dart 파일에 있는 main 함수를 다음과 같이 수정
-              ![My Screenshot](assets/voidmain_before.png)
+            - ![My Screenshot](assets/voidmain_before.png)
               ![My Screenshot](assets/voidmain_after.png)
         - 
 
