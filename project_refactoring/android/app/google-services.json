@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "2089592175",
+    "project_id": "test250512-1",
+    "storage_bucket": "test250512-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2089592175:android:6c701d37230b0657c8349a",
+        "android_client_info": {
+          "package_name": "com.example.dogdack_refac"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk063JRYgLAHp8yRkaF3l7ak1n_b4fl44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

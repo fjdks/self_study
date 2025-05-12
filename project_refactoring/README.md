@@ -19,6 +19,24 @@
    - powershell 실행
    - flutter doctor 입력
    - 발생한 각 에러 해결
+     7. Firebase 연동
+        - Web에서 Firebase 콘솔에 접속
+        - 프로젝트 생성
+        - android studio terminal에 다음 명령어 입력
+          - npm(node.js) 버전 업데이트
+          - 시스템 환경 변수 -> 시스템 변수 -> path 에 nodejs 파일의 정확한 경로 추가 (C:\Program Files\nodejs)
+          - npm install -g firebase-tools
+          - firebase login
+          - dart pub global activate flutterfire_cli
+            -> 경고 메세지 뜨면 환경변수에 경로 추가(ex : C:\Users\User\AppData\Local\Pub\Cache\bin)
+          - flutter pub add firebase_core
+          - androidstudio(or cmd 등) 재시작
+          - flutterfire configure
+            - 이전에 생성한 firebase 프로젝트 선택
+            - main.dart 파일에 있는 main 함수를 다음과 같이 수정
+              ![My Screenshot](assets/voidmain_before.png)
+              ![My Screenshot](assets/voidmain_after.png)
+        - 
 
 ## Developing
 
