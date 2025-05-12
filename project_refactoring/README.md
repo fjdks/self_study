@@ -18,3 +18,6 @@
    - powershell 실행
    - flutter doctor 입력
    - 발생한 각 에러 해결
+
+## Developing
+1. SSAFY - S08P12A503 의 DogDack 프로젝트를 분석하고 리팩토링 한다.
