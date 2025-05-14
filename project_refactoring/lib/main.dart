@@ -3,17 +3,56 @@ import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:get/get.dart';
+
 Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    MaterialApp(
-      home : Scaffold(
-        body: Text(
-          'Hello World',
+    GetMaterialApp(
+      title: 'dogdack',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 100, 92, 170),
+        ),
+        primaryColor: const Color.fromARGB(255, 100, 92, 170),
+        fontFamily: 'bmjua',
+        //textButtonTheme:,
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            color: Color.fromARGB(255, 80, 78, 91),
+          ),
+          displayMedium: TextStyle(
+            fontSize: 16,
+            color: Color.fromARGB(255, 100, 92, 170),
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 16,
+            color: Color.fromARGB(255, 80, 78, 91),
+          ),
         ),
       ),
+      home: MyApp(),
     ),
   );
+}
+
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
+  bool isFinish = false;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
 }
