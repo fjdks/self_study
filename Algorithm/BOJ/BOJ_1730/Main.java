@@ -4,107 +4,78 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
-	static char[][] board;
-	static int[] cur_pos, next_pos;
-	static int N;
-	static char cur_pt, next_pt;
-	
-	static void print() {
-		System.out.println("--------------------");
-		System.out.println("cur_pos : " + Arrays.toString(cur_pos));
-		System.out.println("next_pos : " + Arrays.toString(next_pos));
-		System.out.println("cur_pt : " + cur_pt);
-		System.out.println("next_pt : " + next_pt);
-		for (int i = 0; i < N; i++) {
-			for(char c : board[i]) System.out.print(c);
-			System.out.println();
-		}
-		System.out.println("--------------------");
-	}
-	
-	static int[] get_next_pos(char command, int[] cp) {
-		int[] np = new int[2];
-		switch (command) {
-		case 'U':
-			np[0] = Math.max(cp[0] - 1, 0);
-			np[1] = cp[1];
-			break;
-		case 'D':
-			np[0] = Math.min(cp[0] + 1, N - 1);
-			np[1] = cp[1];
-			break;
-		case 'L':
-			np[0] = cp[0];
-			np[1] = Math.max(cp[1] - 1, 0);
-			break;
-		case 'R':
-			np[0] = cp[0];
-			np[1] = Math.min(cp[1] + 1, N - 1);
-			break;
-		}
-		return np;
-	}
-	
-	static char get_pattern(char command) {
-		if(command == 'D' || command == 'U') {
-			return '|';
-		} else return '-';
-	}
-	
-	static void marking(char command) {
-		if(board[cur_pos[0]][cur_pos[1]] == '.') board[cur_pos[0]][cur_pos[1]] = cur_pt;
-		
-		if(board[next_pos[0]][next_pos[1]] == '.') board[next_pos[0]][next_pos[1]] = next_pt;
-		if(cur_pt != next_pt) board[cur_pos[0]][cur_pos[1]] = '+';
-	}
-	
-	static void movement(char command) {
-		next_pos = get_next_pos(command, cur_pos);
-		char pt = get_pattern(command);
-		
-		if(cur_pt == ' ') cur_pt = pt;
-		next_pt = pt;
-		
-//		System.out.println("cur_pos : " + Arrays.toString(cur_pos));
-//		System.out.println("next_pos : " + Arrays.toString(next_pos));
-		marking(command);
-		
-//		print();
-		cur_pos = next_pos;
-		cur_pt = next_pt;
-	}
-	
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		N = Integer.parseInt(br.readLine());
-		String order = br.readLine();
-		
-		board = new char[N][N];
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++) {
-				board[i][j] = '.';
-			}
-		}
-		
-		cur_pos = new int[] {0, 0};
-		next_pos = new int[] {0, 0};
-		cur_pt = ' ';
-		
-		
-		
-		
-		
-		
-		
-		for (int i = 0; i < order.length(); i++) {
-			movement(order.charAt(i));
-		}
-		for (int i = 0; i < N; i++) {
-			for(char c : board[i]) System.out.print(c);
-			System.out.println();
-		}
-	}
-
+    static int N;
+    static int[] cur_index, next_index;
+    static char[][] board;
+    
+    static void print() {
+        for (int i = 0; i < N; i++) {
+            for (char c : board[i]) System.out.print(c);
+            System.out.println();
+        }
+    }
+    
+    static int[] get_new_index(char c) {
+        int[] ni = new int[2];
+        switch (c) {
+            case 'U': 
+            	ni[0] = cur_index[0] - 1; 
+            	ni[1] = cur_index[1]; 
+            	break;
+            case 'D': 
+            	ni[0] = cur_index[0] + 1; 
+            	ni[1] = cur_index[1]; 
+            	break;
+            case 'L': 
+            	ni[0] = cur_index[0]; 
+            	ni[1] = cur_index[1] - 1; 
+            	break;
+            case 'R': 
+            	ni[0] = cur_index[0]; 
+            	ni[1] = cur_index[1] + 1; 
+            	break;
+        }
+        return ni;
+    }
+    
+    static boolean is_in_range(int[] index) {
+        return !(index[0] < 0 || index[0] >= N || index[1] < 0 || index[1] >= N);
+    }
+    
+    static void mark(int r, int c, char pattern) {
+        if (board[r][c] == '.') board[r][c] = pattern;
+        else if (board[r][c] != pattern) board[r][c] = '+';
+    }
+    
+    static void draw(char c) {
+        char pattern = (c == 'U' || c == 'D') ? '|' : '-';
+        mark(cur_index[0], cur_index[1], pattern);
+        mark(next_index[0], next_index[1], pattern);
+    }
+    
+    static void main_task(char c) {
+        int[] ni = get_new_index(c);
+        if (!is_in_range(ni)) return;
+        next_index = ni;
+        draw(c);
+        cur_index = next_index;
+    }
+    
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        N = Integer.parseInt(br.readLine());
+        String input = br.readLine();
+        
+        board = new char[N][N];
+        for (int i = 0; i < N; i++) Arrays.fill(board[i], '.');
+        
+        cur_index = new int[] {0, 0};
+        for (int i = 0; i < input.length(); i++) {
+            char command = input.charAt(i);
+            main_task(command);
+        }
+        
+        print();
+    }
 }
