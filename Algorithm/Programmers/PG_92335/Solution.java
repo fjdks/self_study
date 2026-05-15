@@ -11,13 +11,12 @@ class Solution {
     
     public int solution(int n, int k) {
         int answer = 0;
-        String converted = (k == 10 ? Integer.toString(n) : Integer.toString(n, k));
+        String converted = Integer.toString(n, k);
         String[] arr = converted.split("0");
         
         for(int i = 0; i < arr.length; i++) {
             if(arr[i].equals("")) continue;
-            String str = arr[i].replace(" ", "");
-            if(isPrime(Long.parseLong(str))) answer++;
+            if(isPrime(Long.parseLong(arr[i]))) answer++;
         }
         
         return answer;
