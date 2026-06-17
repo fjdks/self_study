@@ -15,7 +15,8 @@ class Solution {
                 } else if(bridge.size() == bridge_length) sum -= bridge.poll();
                 else {
                     if(sum + truck <= weight) {
-                        bridge.add(truck);
+                        bri
+                        dge.add(truck);
                         sum += truck;
                         time++;
                         break;
